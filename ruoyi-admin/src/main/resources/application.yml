@@ -105,6 +105,7 @@ mybatis:
   mapperLocations: classpath*:mapper/**/*Mapper.xml
   # 加载全局的配置文件
   configLocation: classpath:mybatis/mybatis-config.xml
+# MyBatis Plus配置
 
 # PageHelper分页插件
 pagehelper:
@@ -127,3 +128,4 @@ xss:
   excludes: /system/notice
   # 匹配链接
   urlPatterns: /system/*,/monitor/*,/tool/*
+
