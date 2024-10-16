@@ -28,7 +28,7 @@
 
         <dependency>
             <groupId>com.ruoyi</groupId>
-            <artifactId>ruoyi-framework</artifactId>
+            <artifactId>ruoyi-common</artifactId>
         </dependency>
 
         <dependency>
@@ -40,6 +40,24 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
             <version>2.5.15</version>
+        </dependency>
+
+        <!-- SpringBoot Web容器 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- SpringBoot 拦截器 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+
+        <!-- 阿里数据库连接池 -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
         </dependency>
 
     </dependencies>

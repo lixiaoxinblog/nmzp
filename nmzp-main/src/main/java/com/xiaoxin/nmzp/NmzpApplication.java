@@ -1,12 +1,13 @@
 package com.xiaoxin.nmzp;
 
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-public class Application {
+@ComponentScan(basePackages = {"com.xiaoxin.nmzp","com.ruoyi"})
+public class NmzpApplication {
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+        SpringApplication.run(NmzpApplication.class, args);
     }
 }

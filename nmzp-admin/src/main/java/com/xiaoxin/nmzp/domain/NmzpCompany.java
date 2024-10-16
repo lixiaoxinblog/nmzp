@@ -7,158 +7,177 @@ import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
  * 公司对象 nmzp_company
- * 
+ *
  * @author xiaoxin
  * @date 2024-10-16
  */
-public class NmzpCompany extends BaseEntity
-{
+public class NmzpCompany extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
-    /** id 主键 */
+    /**
+     * id 主键
+     */
     private Long companyId;
 
-    /** 公司名称 */
+    /**
+     * 公司名称
+     */
     @Excel(name = "公司名称")
     private String name;
 
-    /** 地址 */
+    /**
+     * 地址
+     */
     @Excel(name = "地址")
     private String address;
 
-    /** 电话 */
+    /**
+     * 电话
+     */
     @Excel(name = "电话")
     private String phone;
 
-    /** 邮箱 */
+    /**
+     * 邮箱
+     */
     @Excel(name = "邮箱")
     private String email;
 
-    /** 公司logo */
+    /**
+     * 公司logo
+     */
     @Excel(name = "公司logo")
     private String logo;
 
-    /** 公司老总ID */
+    /**
+     * 公司老总ID
+     */
     @Excel(name = "公司老总ID")
     private Long boss;
 
-    /** 创建用户 */
+    /**
+     * 创建用户
+     */
     @Excel(name = "创建用户")
     private String createUser;
 
-    /** 删除标识（0默认1删除） */
+    /**
+     * 删除标识（0默认1删除）
+     */
     private Long isDel;
 
-    /** 状态（0为审核，1已审核） */
+    /**
+     * 状态（0为审核，1已审核）
+     */
     @Excel(name = "状态", readConverterExp = "0=为审核，1已审核")
     private Long status;
 
-    public void setCompanyId(Long companyId) 
-    {
+    private String license;
+
+    public void setCompanyId(Long companyId) {
         this.companyId = companyId;
     }
 
-    public Long getCompanyId() 
-    {
+    public Long getCompanyId() {
         return companyId;
     }
-    public void setName(String name) 
-    {
+
+    public void setName(String name) {
         this.name = name;
     }
 
-    public String getName() 
-    {
+    public String getName() {
         return name;
     }
-    public void setAddress(String address) 
-    {
+
+    public void setAddress(String address) {
         this.address = address;
     }
 
-    public String getAddress() 
-    {
+    public String getAddress() {
         return address;
     }
-    public void setPhone(String phone) 
-    {
+
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
-    public String getPhone() 
-    {
+    public String getPhone() {
         return phone;
     }
-    public void setEmail(String email) 
-    {
+
+    public void setEmail(String email) {
         this.email = email;
     }
 
-    public String getEmail() 
-    {
+    public String getEmail() {
         return email;
     }
-    public void setLogo(String logo) 
-    {
+
+    public void setLogo(String logo) {
         this.logo = logo;
     }
 
-    public String getLogo() 
-    {
+    public String getLogo() {
         return logo;
     }
-    public void setBoss(Long boss) 
-    {
+
+    public void setBoss(Long boss) {
         this.boss = boss;
     }
 
-    public Long getBoss() 
-    {
+    public Long getBoss() {
         return boss;
     }
-    public void setCreateUser(String createUser) 
-    {
+
+    public void setCreateUser(String createUser) {
         this.createUser = createUser;
     }
 
-    public String getCreateUser() 
-    {
+    public String getCreateUser() {
         return createUser;
     }
-    public void setIsDel(Long isDel) 
-    {
+
+    public void setIsDel(Long isDel) {
         this.isDel = isDel;
     }
 
-    public Long getIsDel() 
-    {
+    public Long getIsDel() {
         return isDel;
     }
-    public void setStatus(Long status) 
-    {
+
+    public void setStatus(Long status) {
         this.status = status;
     }
 
-    public Long getStatus() 
-    {
+    public Long getStatus() {
         return status;
+    }
+
+    public String getLicense() {
+        return license;
+    }
+
+    public void setLicense(String license) {
+        this.license = license;
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("companyId", getCompanyId())
-            .append("name", getName())
-            .append("address", getAddress())
-            .append("phone", getPhone())
-            .append("email", getEmail())
-            .append("logo", getLogo())
-            .append("boss", getBoss())
-            .append("createTime", getCreateTime())
-            .append("createUser", getCreateUser())
-            .append("updateTime", getUpdateTime())
-            .append("isDel", getIsDel())
-            .append("status", getStatus())
-            .toString();
+        return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
+                .append("companyId", getCompanyId())
+                .append("name", getName())
+                .append("address", getAddress())
+                .append("phone", getPhone())
+                .append("email", getEmail())
+                .append("logo", getLogo())
+                .append("boss", getBoss())
+                .append("createTime", getCreateTime())
+                .append("createUser", getCreateUser())
+                .append("updateTime", getUpdateTime())
+                .append("isDel", getIsDel())
+                .append("status", getStatus())
+                .append("license", getLicense())
+                .toString();
     }
 }
