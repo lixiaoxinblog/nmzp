@@ -224,6 +224,7 @@
         <module>ruoyi-generator</module>
         <module>ruoyi-common</module>
         <module>nmzp-main</module>
+        <module>nmzp-admin</module>
     </modules>
     <packaging>pom</packaging>
 

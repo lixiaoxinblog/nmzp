@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaoxin.nmzp.mapper.NmzpCompanyMapper">
+    
+    <resultMap type="com.xiaoxin.nmzp.domain.NmzpCompany" id="NmzpCompanyResult">
+        <result property="companyId"    column="company_id"    />
+        <result property="name"    column="name"    />
+        <result property="address"    column="address"    />
+        <result property="phone"    column="phone"    />
+        <result property="email"    column="email"    />
+        <result property="logo"    column="logo"    />
+        <result property="boss"    column="boss"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="createUser"    column="create_user"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="isDel"    column="is_del"    />
+        <result property="status"    column="status"    />
+    </resultMap>
+
+    <sql id="selectNmzpCompanyVo">
+        select company_id, name, address, phone, email, logo, boss, create_time, create_user, update_time, is_del, status from nmzp_company
+    </sql>
+
+    <select id="selectNmzpCompanyList" parameterType="com.xiaoxin.nmzp.domain.NmzpCompany" resultMap="NmzpCompanyResult">
+        <include refid="selectNmzpCompanyVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="address != null  and address != ''"> and address = #{address}</if>
+            <if test="phone != null  and phone != ''"> and phone = #{phone}</if>
+            <if test="email != null  and email != ''"> and email = #{email}</if>
+            <if test="boss != null "> and boss = #{boss}</if>
+            <if test="createUser != null  and createUser != ''"> and create_user = #{createUser}</if>
+            <if test="isDel != null "> and is_del = #{isDel}</if>
+            <if test="status != null "> and status = #{status}</if>
+        </where>
+    </select>
+    
+    <select id="selectNmzpCompanyByCompanyId" parameterType="Long" resultMap="NmzpCompanyResult">
+        <include refid="selectNmzpCompanyVo"/>
+        where company_id = #{companyId}
+    </select>
+
+    <insert id="insertNmzpCompany" parameterType="com.xiaoxin.nmzp.domain.NmzpCompany">
+        insert into nmzp_company
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="companyId != null">company_id,</if>
+            <if test="name != null">name,</if>
+            <if test="address != null">address,</if>
+            <if test="phone != null">phone,</if>
+            <if test="email != null">email,</if>
+            <if test="logo != null">logo,</if>
+            <if test="boss != null">boss,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="createUser != null">create_user,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="isDel != null">is_del,</if>
+            <if test="status != null">status,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="companyId != null">#{companyId},</if>
+            <if test="name != null">#{name},</if>
+            <if test="address != null">#{address},</if>
+            <if test="phone != null">#{phone},</if>
+            <if test="email != null">#{email},</if>
+            <if test="logo != null">#{logo},</if>
+            <if test="boss != null">#{boss},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="createUser != null">#{createUser},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="isDel != null">#{isDel},</if>
+            <if test="status != null">#{status},</if>
+         </trim>
+    </insert>
+
+    <update id="updateNmzpCompany" parameterType="com.xiaoxin.nmzp.domain.NmzpCompany">
+        update nmzp_company
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null">name = #{name},</if>
+            <if test="address != null">address = #{address},</if>
+            <if test="phone != null">phone = #{phone},</if>
+            <if test="email != null">email = #{email},</if>
+            <if test="logo != null">logo = #{logo},</if>
+            <if test="boss != null">boss = #{boss},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="createUser != null">create_user = #{createUser},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="isDel != null">is_del = #{isDel},</if>
+            <if test="status != null">status = #{status},</if>
+        </trim>
+        where company_id = #{companyId}
+    </update>
+
+    <delete id="deleteNmzpCompanyByCompanyId" parameterType="Long">
+        delete from nmzp_company where company_id = #{companyId}
+    </delete>
+
+    <delete id="deleteNmzpCompanyByCompanyIds" parameterType="String">
+        delete from nmzp_company where company_id in 
+        <foreach item="companyId" collection="array" open="(" separator="," close=")">
+            #{companyId}
+        </foreach>
+    </delete>
+</mapper>
