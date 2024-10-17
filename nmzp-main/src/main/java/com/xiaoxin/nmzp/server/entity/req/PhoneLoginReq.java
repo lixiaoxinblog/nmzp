@@ -12,4 +12,20 @@ public class PhoneLoginReq {
     private String phone;
     @NotBlank(message = "验证码不能为空！")
     private String code;
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 }

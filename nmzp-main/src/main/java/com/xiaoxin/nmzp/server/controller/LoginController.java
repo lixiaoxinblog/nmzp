@@ -1,8 +1,11 @@
 package com.xiaoxin.nmzp.server.controller;
 
+import com.ruoyi.common.constant.Constants;
+import com.ruoyi.common.constant.HttpStatus;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.xiaoxin.nmzp.constants.NmzpConstant;
+import com.xiaoxin.nmzp.server.entity.req.LoginReq;
 import com.xiaoxin.nmzp.server.entity.req.PhoneLoginReq;
 import com.xiaoxin.nmzp.server.service.NmzpLoginService;
 import org.hibernate.validator.constraints.Length;
@@ -14,9 +17,9 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
 @RestController
-@RequestMapping("/nmzp/user")
+@RequestMapping("/nmzp/login")
 @Validated
-public class UserController extends BaseController {
+public class LoginController extends BaseController {
     @Autowired
     private NmzpLoginService nmzpLoginService;
 
@@ -42,9 +45,21 @@ public class UserController extends BaseController {
      * @param phoneLogin
      * @return token
      */
-    @RequestMapping("/login/{phone}")
+    @RequestMapping("/phone")
     public AjaxResult loginByPhone(@RequestBody @Validated PhoneLoginReq phoneLogin) {
 //        nmzpLoginService.login();
         return AjaxResult.success("");
+    }
+
+    /**
+     * 登录接口
+     * @return
+     */
+    @PostMapping
+    public AjaxResult login(@RequestBody @Validated LoginReq loginReq){
+        String token = nmzpLoginService.login(loginReq);
+        AjaxResult ajaxResult = AjaxResult.success();
+        ajaxResult.put(Constants.TOKEN,token);
+        return ajaxResult;
     }
 }

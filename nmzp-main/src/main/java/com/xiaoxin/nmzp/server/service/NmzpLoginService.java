@@ -1,5 +1,7 @@
 package com.xiaoxin.nmzp.server.service;
 
+import com.xiaoxin.nmzp.server.entity.req.LoginReq;
+
 /**
  * 前台登录业务类
  */
@@ -13,4 +15,11 @@ public interface NmzpLoginService {
      * @return
      */
     String genCode(String phone);
+
+    /**
+     * 使用密码登录
+     * @param loginReq
+     * @return
+     */
+    String login(LoginReq loginReq);
 }

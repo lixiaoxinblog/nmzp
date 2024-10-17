@@ -3,6 +3,7 @@ package com.xiaoxin.nmzp.execption;
 import com.ruoyi.common.constant.HttpStatus;
 import com.ruoyi.common.core.domain.AjaxResult;
 import org.springframework.validation.BindException;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -22,6 +23,12 @@ public class WebExceptionHandler {
     public AjaxResult constraintViolationExceptionHandler(ConstraintViolationException e) {
         ConstraintViolation<?> constraintViolation = e.getConstraintViolations().stream().findFirst().get();
         return AjaxResult.error(HttpStatus.ERROR, constraintViolation.getMessage());
+    }
+
+    @ExceptionHandler(value = MethodArgumentNotValidException.class)
+    public AjaxResult methodArgumentNotValidExceptionHandler(MethodArgumentNotValidException e) {
+        ObjectError objectError = e.getBindingResult().getAllErrors().stream().findFirst().get();
+        return AjaxResult.error(HttpStatus.ERROR,objectError.getDefaultMessage());
     }
 
     @ExceptionHandler(value = Exception.class)
