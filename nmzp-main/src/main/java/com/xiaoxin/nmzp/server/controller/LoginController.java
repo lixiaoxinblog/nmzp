@@ -8,6 +8,7 @@ import com.xiaoxin.nmzp.constants.NmzpConstant;
 import com.xiaoxin.nmzp.server.entity.req.LoginReq;
 import com.xiaoxin.nmzp.server.entity.req.PhoneLoginReq;
 import com.xiaoxin.nmzp.server.service.NmzpLoginService;
+import org.aspectj.weaver.loadtime.Aj;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -47,8 +48,10 @@ public class LoginController extends BaseController {
      */
     @RequestMapping("/phone")
     public AjaxResult loginByPhone(@RequestBody @Validated PhoneLoginReq phoneLogin) {
-//        nmzpLoginService.login();
-        return AjaxResult.success("");
+        String token = nmzpLoginService.loginPhone(phoneLogin);
+        AjaxResult ajaxResult = AjaxResult.success();
+        ajaxResult.put(Constants.TOKEN,token);
+        return ajaxResult;
     }
 
     /**

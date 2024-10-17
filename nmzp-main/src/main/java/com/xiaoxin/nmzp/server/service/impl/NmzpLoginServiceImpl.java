@@ -9,6 +9,7 @@ import com.ruoyi.common.exception.ServiceException;
 import com.xiaoxin.nmzp.constants.NmzpConstant;
 import com.xiaoxin.nmzp.server.entity.domain.SysUser;
 import com.xiaoxin.nmzp.server.entity.req.LoginReq;
+import com.xiaoxin.nmzp.server.entity.req.PhoneLoginReq;
 import com.xiaoxin.nmzp.server.mapper.SysUserMapper;
 import com.xiaoxin.nmzp.server.service.NmzpLoginService;
 import com.xiaoxin.nmzp.utils.JwtUtil;
@@ -48,6 +49,37 @@ public class NmzpLoginServiceImpl implements NmzpLoginService {
         String code = String.format("%06d", new Random().nextInt(999999));
         redisCache.setCacheObject(NmzpConstant.LOGIN_CODE_KEY + phone, code, 5, TimeUnit.MINUTES);
         return code;
+    }
+
+    /**
+     * 使用手机号进行登录
+     *  1.校验验证码
+     *  2.新手机号进行注册
+     *  3.执行登录逻辑
+     * @param phoneLoginReq
+     * @return
+     */
+    @Override
+    public String loginPhone(PhoneLoginReq phoneLoginReq) {
+        if (checkCode(phoneLoginReq)){
+            throw new ServiceException("验证码过期");
+        }
+        LambdaQueryWrapper<SysUser> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(SysUser::getPhonenumber, phoneLoginReq.getPhone());
+        SysUser sysUser = sysUserMapper.selectOne(queryWrapper);
+        String defaultPwd = "123456";
+        if (ObjectUtils.isEmpty(sysUser)){
+            //简单注册用户
+            SysUser user = new SysUser();
+            user.setUsername(phoneLoginReq.getPhone());
+            user.setPhonenumber(phoneLoginReq.getPhone());
+            user.setNickName("niuma:"+new Random().nextLong());
+            user.setPassword(bCryptPasswordEncoder.encode(defaultPwd));
+            sysUserMapper.insert(user);
+            sysUser = user;
+        }
+        LoginUser loginUser = genLoginUser(sysUser);
+        return jwtUtil.createToken(loginUser);
     }
 
     /**
@@ -95,5 +127,17 @@ public class NmzpLoginServiceImpl implements NmzpLoginService {
         BeanUtils.copyProperties(sysUser,user);
         loginUser.setUser(user);
         return loginUser;
+    }
+
+    /**
+     * 校验验证码
+     */
+    public boolean checkCode(PhoneLoginReq phoneLoginReq) {
+        String code = phoneLoginReq.getCode();
+        String cacheCode = redisCache.getCacheObject(NmzpConstant.LOGIN_CODE_KEY + code);
+        if (ObjectUtils.isEmpty(cacheCode)){
+            return false;
+        }
+        return phoneLoginReq.getPhone().equals(cacheCode);
     }
 }
