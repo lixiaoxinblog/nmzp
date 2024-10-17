@@ -2,6 +2,7 @@ package com.xiaoxin.nmzp.server.filter;
 
 import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.ruoyi.common.core.domain.model.LoginUser;
+import com.ruoyi.common.exception.ServiceException;
 import com.xiaoxin.nmzp.utils.JwtUtil;
 import com.xiaoxin.nmzp.utils.UserUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,7 @@ public class AuthFilter extends OncePerRequestFilter {
         }
         LoginUser loginUser = jwtUtil.getLoginUser(request);
         if (ObjectUtils.isEmpty(loginUser)){
-            throw new ServletException("登录用户异常，请重新登录！");
+            throw new ServiceException("登录用户异常，请重新登录！");
         }
         jwtUtil.refreshToken(loginUser);
         //存入当前线程

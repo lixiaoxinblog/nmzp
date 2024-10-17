@@ -11,6 +11,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class NmzpApplication {
     public static void main(String[] args) {
         SpringApplication.run(NmzpApplication.class, args);
+        System.out.println("(♥◠‿◠)ﾉﾞ  牛马招聘启动成功   ლ(´ڡ`ლ)ﾞ  \n" +
+                "            _                            \n" +
+                "  _ _      (_)    _  _    _ __    __ _   \n" +
+                " | ' \\     | |   | +| |  | '  \\  / _` |  \n" +
+                " |_||_|   _|_|_   \\_,_|  |_|_|_| \\__,_|  \n" +
+                "_|\"\"\"\"\"|_|\"\"\"\"\"|_|\"\"\"\"\"|_|\"\"\"\"\"|_|\"\"\"\"\"| \n" +
+                "\"`-0-0-'\"`-0-0-'\"`-0-0-'\"`-0-0-'\"`-0-0-' \n ");
     }
 
     @Bean

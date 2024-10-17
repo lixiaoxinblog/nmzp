@@ -1,5 +1,7 @@
 package com.xiaoxin.nmzp.server.entity.domain;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.io.Serializable;
@@ -40,10 +42,12 @@ public class SysUser implements Serializable {
 
     private String createBy;
 
+    @TableField(fill = FieldFill.INSERT)
     private Date createTime;
 
     private String updateBy;
 
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
 
     private String remark;

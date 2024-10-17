@@ -2,6 +2,7 @@ package com.xiaoxin.nmzp.server.service;
 
 import com.xiaoxin.nmzp.server.entity.req.LoginReq;
 import com.xiaoxin.nmzp.server.entity.req.PhoneLoginReq;
+import com.xiaoxin.nmzp.server.entity.req.RegisterReq;
 
 /**
  * 前台登录业务类
@@ -30,4 +31,10 @@ public interface NmzpLoginService {
      * @return
      */
     String loginPhone(PhoneLoginReq phoneLoginReq);
+
+    /**
+     * 用户注册
+     * @param registerReq
+     */
+    void register(RegisterReq registerReq);
 }

@@ -7,6 +7,7 @@ import com.ruoyi.common.core.domain.AjaxResult;
 import com.xiaoxin.nmzp.constants.NmzpConstant;
 import com.xiaoxin.nmzp.server.entity.req.LoginReq;
 import com.xiaoxin.nmzp.server.entity.req.PhoneLoginReq;
+import com.xiaoxin.nmzp.server.entity.req.RegisterReq;
 import com.xiaoxin.nmzp.server.service.NmzpLoginService;
 import org.aspectj.weaver.loadtime.Aj;
 import org.hibernate.validator.constraints.Length;
@@ -64,5 +65,14 @@ public class LoginController extends BaseController {
         AjaxResult ajaxResult = AjaxResult.success();
         ajaxResult.put(Constants.TOKEN,token);
         return ajaxResult;
+    }
+
+    /**
+     * 注册接口
+     */
+    @PostMapping("/register")
+    public AjaxResult register(@RequestBody @Validated RegisterReq registerReq){
+        nmzpLoginService.register(registerReq);
+        return AjaxResult.success();
     }
 }
