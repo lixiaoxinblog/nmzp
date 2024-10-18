@@ -81,12 +81,13 @@ public class NmzpLoginServiceImpl implements NmzpLoginService {
             user.setPhonenumber(phoneLoginReq.getPhone());
             user.setStatus(UserStatus.NOT_UPDATE.getCode());
             user.setPassword(bCryptPasswordEncoder.encode(defaultPwd));
-            if (!(doRegister(sysUser) > 0)) {
+            if (!(doRegister(user) > 0)) {
                 throw new ServiceException("登录失败！");
             }
             sysUser = user;
         }
         LoginUser loginUser = genLoginUser(sysUser);
+        redisCache.deleteObject(NmzpConstant.LOGIN_CODE_KEY + phoneLoginReq.getPhone());
         return jwtUtil.createToken(loginUser);
     }
 

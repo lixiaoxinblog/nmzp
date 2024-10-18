@@ -28,7 +28,7 @@ public interface NmzpLoginService {
     /**
      * 使用手机号进行登录
      * @param phoneLoginReq
-     * @return
+     * @returns
      */
     String loginPhone(PhoneLoginReq phoneLoginReq);
 
